@@ -1,0 +1,4 @@
+src/model_save/model.pth filter=lfs diff=lfs merge=lfs -text
+src/data/word_vector/wordsords_vector.model filter=lfs diff=lfs merge=lfs -text
+src/data/word_vector/wordsords_vector.model.syn1neg.npy filter=lfs diff=lfs merge=lfs -text
+src/data/word_vector/wordsords_vector.model.wv.vectors.npy filter=lfs diff=lfs merge=lfs -text
