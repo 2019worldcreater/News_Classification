@@ -36,7 +36,8 @@ $ pip install gensim
 ```shell
 $ git clone git@gitee.com:worldcreator/News_Classification.git
 
-#先手动解压 src/model_save/model.7z -> src/model_save/model.pth
+#先手动解压 src/model_save/model.7z -> src/model_save/model.pth 
+# 还要解压 src/data/word_vector.7z
 $ cd News_Classification
 
 $ python main.py
