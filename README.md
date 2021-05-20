@@ -84,7 +84,7 @@ src/data/data.7z 解压即可得到我的原始数据
 同样解压 src/data/word_vector/word_vector.7z，词向量数据
 
 ```shell
-$ git clone git@gitee.com:worldcreator/News_Classification.gi
+$ git clone https://github.com/2019worldcreater/News_Classification.git
 
 $ cd News_Classification
 
