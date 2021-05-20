@@ -1,8 +1,8 @@
 # News_Classification
 
-<img src="https://img.shields.io/badge/pytorch-1.8.1GPU-orange"> <img src="https://img.shields.io/badge/python-3.6-green">
+<a href='www.baidu.com'><img src="https://img.shields.io/badge/pytorch-1.8.1GPU-orange"></a> <img src="https://img.shields.io/badge/python-3.6-green">
 
-
+[![](https://img.shields.io/badge/pytorch-1.8.1GPU-orange "title")](https://www.baidu.com/)
 
 #### 介绍
 新闻资讯文本分类
@@ -13,7 +13,7 @@
 
 #### TextCNN模型示意图
 
-<img src="./TextCNN.png">
+<img src="./image_readme/TextCNN.png">
 
 
 
