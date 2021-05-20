@@ -1,6 +1,6 @@
 # News_Classification
 
-[![](https://img.shields.io/badge/pytorch-1.8.1GPU-orange "title")](https://pytorch.org/)[![](https://img.shields.io/badge/python-3.6-green "title")](https://www.python.org/)
+[![](https://img.shields.io/badge/pytorch-1.8.1GPU-orange "title")](https://pytorch.org/) [![](https://img.shields.io/badge/python-3.6-green "title")](https://www.python.org/)
 
 #### 介绍
 #### 新闻资讯文本分类
