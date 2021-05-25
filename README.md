@@ -37,7 +37,7 @@ src/data/data.7z 解压即可得到我的原始数据
 
 1.将原始新闻文本文件按行打乱
 
-2.使用jieba对所有新闻正文内容进行分词，得到词库
+2.使用jieba对所有新闻正文内容进行分词，得到词库(每一行一个词的文本文件)
 
 3.使用word2vec训练词库生成词向量模型
 
@@ -45,6 +45,7 @@ src/data/data.7z 解压即可得到我的原始数据
 
 分类,正文 -----> (分类id, [2,3,4,..词索引])
 
+每100条(id,[..])组成一个[(),(),...],然后保存为sample.pth
 
 
 #### TextCNN模型示意图
@@ -84,7 +85,7 @@ src/data/data.7z 解压即可得到我的原始数据
 同样解压 src/data/word_vector/word_vector.7z，词向量数据
 
 ```shell
-$ git clone https://github.com/2019worldcreater/News_Classification.git
+$ git clone https://gitee.com/worldcreator/News_Classification.git
 
 $ cd News_Classification
 

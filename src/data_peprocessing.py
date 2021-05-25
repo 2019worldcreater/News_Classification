@@ -5,15 +5,11 @@ from data_loader import labels
 from jieba_tool import get_key_words_all_step
 from word_vector_tool import file_to_sentences, add_sentences, get_vector_model, get_index
 
-
-# test_data的分类及数量 {'娱乐': 1000, '财经': 1000, '房地产': 1000, '旅游': 1000, '科技': 1000, '体育': 1000, '健康': 1000, '教育': 1000,
-# '汽车': 1000, '新闻': 1000, '文化': 1000, '女人': 1000}
-# 语料集是txt文件，如果用windows自带的记事本打开，会卡死，建议用notepad++打开，相当流畅
-# train_data的分类及数量 '娱乐': 1934, '财经': 1877, '房地产': 1872, '旅游': 1998, '科技': 1988, '体育': 1978, '健康': 2000, '教育': 1979,
-# '汽车': 1996, '新闻': 1935, '文化': 1995, '女人': 1997
+# 须知： 我的原始文件是文本文件Utf-8编码，文件中每一行分为分类和正文, 两者以 '\t' 分隔,即：   财经  很长一串新闻内容
+# 如果你的数据集不是这个格式，可以自己实现，这个文件无非就三个4个步骤： 打乱，得到词库，训练词向量，打包
 
 
-# 将原有的 pre.txt 打乱行写进新的shuffle_txt文件中
+# 将原有的原始数据文件pre.txt 打乱行写进新的shuffle_txt文件中
 def shuffle_txt_data(pre_txt, shuffle_txt):
     # 用于将原有排序的数据打乱，方便后面训练
     encoding = 'utf-8'
@@ -27,10 +23,9 @@ def shuffle_txt_data(pre_txt, shuffle_txt):
                 file.write(each_line)
 
 
-# souhu_train.txt 文件中每一行分为分类和正文, 两者以 '\t' 分隔,test也是如此
-# 首先先要训练语料集中的词汇，使用word2vec建立词向量模型
-# 将分词的结果以每一行一个词，保存在 split_txt中，后面直接将将该文件训练词向量
-# 这个过程很慢，2万行数据花了我20多分钟吧
+
+# 函数作用： 对每一条新闻的正文提取关键词，将分词的结果以每一行一个词，保存在split_txt中，即词库文件
+# 参数: news_txt 数据文件,打没打乱的都行
 def split_words(news_txt, split_txt):
     with open(news_txt, 'r', encoding='utf-8') as lines:
         with open(split_txt, 'a', encoding='utf-8') as file:
@@ -44,16 +39,19 @@ def split_words(news_txt, split_txt):
                     file.write(key + '\n')
 
 
-# 原有词向量模型 model = get_vector_model()
-# split_txt 分词文件，上面那个函数的结果
+# 函数作用：基于词库文件，使用word2vec建立词向量模型
+# 参数：model:原有词向量模型, word_vector_tool的get_vector_model()得到
+# 参数 split_txt,上面那个函数的结果，词库文件
 def train_vector(model, split_txt):
     # build_model(file_to_sentences(split_txt)) 当model没有时
     return add_sentences(model, file_to_sentences(split_txt))
 
 
-# 先将每条新闻正文为 (label,[word1_index,word2_index,....]), label是labels词典中分类名对应的id,
+# 先将每条新闻正文化为 (label,[word1_index,word2_index,....]), label是labels词典中分类名对应的id,
 # [....]则是正文内容分词后，每个词在词向量模型中的index，一定要先split_word,后train_vector
 # 分词索引[..]长度固定为 50,,不足补0,如果不固定，[[49][50]....] 这种形状 torch.tensor()会出错
+# 参数：new_txt, 打乱后的数据文件
+# 参数: directory，文件夹路径
 def package_news_data(news_txt, directory):
     sample_size = 100  # 每100个新闻为一个sample
     key_size = 50  # 关键词数量

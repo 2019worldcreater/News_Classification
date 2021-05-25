@@ -16,9 +16,8 @@ def train(flag, epoch_size):
         net = NewsModel(Config).to(device)
         net.init_embedding(get_vector_weight(get_vector_model()))
         epoch = 0
-    # 我之前用的一直是 Adam，后面改成了 SGD, lr是学习率，可以理解成每一步优化的幅度，一开始可以较大,后面要逐渐变小
-    optimizer = torch.optim.SGD(net.parameters(), lr=1e-4, momentum=0.9)
-    # optimizer = torch.optim.Adam(net.parameters(), lr=1e-5)
+    # optimizer = torch.optim.SGD(net.parameters(), lr=1e-4, momentum=0.9)
+    optimizer = torch.optim.Adam(net.parameters(), lr=1e-2)
     # CrossEntropyLoss 交叉熵损失,F.cross_entropy()也是，但前者会先进行softmax运算,后者不会,
     # 所以在我定义的模型最后没有显式使用return F.SoftMax(x)，而是直接返回全连接的结果
     # 如果在模型部分使用了softmax,那么此时应换成nn.NLLLoss()
