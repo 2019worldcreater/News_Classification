@@ -1,7 +1,7 @@
 import torch
 
 from data_loader import MAX_TRAIN_INDEX, get_lw_of_train_sample, MAX_TEST_INDEX, get_lw_of_test_sample, categories
-from model import get_trained_net
+from model import get_trained_net, device
 
 
 # sample_flag, True 用测试数据测试，False:用训练数据测试
@@ -20,7 +20,7 @@ def test(sample_flag):
             labels, words = get_lw_of_test_sample(sample_index)
         else:
             labels, words = get_lw_of_train_sample(sample_index)
-        labels, words = torch.tensor(labels).cuda(), torch.tensor(words).cuda()
+         labels, words = torch.tensor(labels).to(device), torch.tensor(words).to(device)
         _, pre = torch.max(net(words).data, 1)
         for pre_index in range(labels.size(0)):
             if pre[pre_index] == labels[pre_index]:
